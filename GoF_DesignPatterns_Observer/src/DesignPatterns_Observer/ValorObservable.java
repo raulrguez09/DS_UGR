@@ -15,24 +15,37 @@ public class ValorObservable extends Observable {
     public ValorObservable(){
         super();
         this.puntos = new ArrayList<Integer>();
-        this.puntos = {0,0};
+        puntos.add(0, 0);
+        puntos.add(1, 0);
     }
 
     // Fija el valor que le pasamos y notifica a los observadores que
     // estan pendientes del cambio de estado de los objetos de esta
     // clase, que su etado se ha visto alterado
-    public void setValor(int nValor[]) {
-       this.puntos = nValor;
-
+    public void incrementarMarcador(ArrayList<Integer> nValor) {
+        int local = puntos.get(0) + nValor.get(0);
+        int visitante = puntos.get(1) + nValor.get(1);
+        this.puntos.set(0, local);
+        this.puntos.set(1, visitante);
+       
+       System.out.println("Sujeto Observable: "+puntos.get(0)+ " - "+puntos.get(1));
+       
        setChanged();
-       notifyObservers();
+       ArrayList<Integer> obj = new ArrayList<Integer>();
+       obj.add(puntos.get(0));
+       obj.add(puntos.get(1));
+       notifyObservers(obj);
        }
 
 
     // Devuelve el valor actual que tiene el objeto
-    public int [] getValor() {
-       return( this.puntos );
-       }
+    public int getLocal() {
+       return( this.puntos.get(0) );
+    }
+    
+    public int getVisitante() {
+       return( this.puntos.get(1) );
+    }
 
     
 }
