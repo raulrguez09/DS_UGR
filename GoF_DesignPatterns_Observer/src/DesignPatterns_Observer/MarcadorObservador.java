@@ -25,6 +25,8 @@ public class MarcadorObservador implements Observer {
     // Actualizamos el valor del objeto que estamos observando en
     // nuestro campo de texto, para reflejar el valor actual del
     // objeto
+    
+    @Override
     public void update( Observable obs, Object obj) {
         if( obs == vo ){
             ArrayList<Integer> marcador = (ArrayList<Integer>) obj;
