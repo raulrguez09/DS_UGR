@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DesignPatterns_Observer;
+import GUI.ventana;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -13,32 +14,33 @@ import java.util.Observer;
 public class MarcadorObservadorPull extends Thread implements Observer {
     private int local;
     private int visitante;
-    public ValorObservable vo;
+    public MarcadorObservable vo;
     private boolean hacambiado = true;
+    private ventana miVentana = ventana.getInstance();
     
-    public MarcadorObservadorPull (ValorObservable o){
+    public MarcadorObservadorPull (MarcadorObservable o){
         this.vo = o;
     }
     
-    public void preguntarDatos(){
+    public void conexionPull(){
         local = vo.getLocal();
         visitante = vo.getVisitante();
         
-        System.out.println("Observando con Pull: " +local+ " - "+visitante);
+        miVentana.setPullLocal(String.valueOf(local));
+        miVentana.setPullVisitante(String.valueOf(visitante));
     }
     
     public void update(Observable obs, Object obj){
-        
     }
     
     @Override
     public void run(){
         while(true){
-                preguntarDatos();
+                conexionPull();
             try{
                 Thread.sleep(3000);
             } catch (InterruptedException ex){
-                //Logger.getLogger(ControlValor.class.getName()).log(Level.WARNING, null, ex);
+                //Logger.getLogger(MarcadorObservadorPull.class.getName()).log(Level.WARNING, null, ex);
             }
         }
     }
